@@ -1,0 +1,96 @@
+=== Smart Courier Planner | dataset=large | parcels=40 | road nodes=60 | van capacity=60 kg ===
+
+--- PHASE 2a: Parcel prioritisation (Merge Sort) ---
+Sort key: (priority asc, deadline asc, value desc)
+Rank ID     Dest  Wt(kg)  Value  Prio  Deadline(h) 
+1    P026   24    1       99     1     2.0         
+2    P005   26    5       88     1     2.0         
+3    P011   57    4       85     1     2.0         
+4    P002   28    14      78     1     2.0         
+5    P016   2     11      67     1     2.0         
+6    P034   51    14      66     1     2.0         
+7    P023   20    13      78     1     3.0         
+8    P019   14    6       75     1     3.0         
+9    P025   33    14      72     1     3.0         
+10   P008   41    5       71     1     3.0         
+11   P015   45    10      68     1     3.0         
+12   P003   18    12      100    1     4.0         
+13   P040   9     6       93     1     4.0         
+14   P020   4     12      60     1     4.0         
+15   P036   34    11      66     2     5.0         
+16   P029   12    12      65     2     5.0         
+17   P014   32    5       63     2     5.0         
+18   P013   12    3       65     2     6.0         
+19   P012   35    8       36     2     6.0         
+20   P024   56    3       35     2     6.0         
+21   P007   8     4       65     2     7.0         
+22   P027   40    12      60     2     7.0         
+23   P038   12    12      60     2     7.0         
+24   P035   37    13      58     2     7.0         
+25   P018   22    1       50     2     7.0         
+26   P039   28    12      58     2     8.0         
+27   P037   29    11      35     2     8.0         
+28   P022   8     13      24     3     8.0         
+29   P033   22    11      24     3     8.0         
+30   P010   24    13      45     3     9.0         
+31   P032   18    13      28     3     9.0         
+32   P004   37    6       25     3     9.0         
+33   P021   51    7       24     3     9.0         
+34   P030   54    10      34     3     10.0        
+35   P001   4     11      31     3     10.0        
+36   P031   53    7       18     3     10.0        
+37   P028   56    4       15     3     10.0        
+38   P006   13    1       20     3     11.0        
+39   P009   49    13      41     3     12.0        
+40   P017   38    8       21     3     12.0        
+
+--- PHASE 2b: Optimal parcel selection (0/1 Knapsack DP) ---
+DP table size: 41 rows x 61 columns
+Selected parcels : ['P026', 'P005', 'P011', 'P019', 'P008', 'P003', 'P040', 'P014', 'P013', 'P024', 'P007', 'P018', 'P028', 'P006']
+Total weight     : 60 / 60 kg
+Total value (DP) : 924
+Greedy-in-sorted-order value for comparison: 629  (DP gain = 295)
+Left for the next trip: ['P002', 'P016', 'P034', 'P023', 'P025', 'P015', 'P020', 'P036', 'P029', 'P012', 'P027', 'P038', 'P035', 'P039', 'P037', 'P022', 'P033', 'P010', 'P032', 'P004', 'P021', 'P030', 'P001', 'P031', 'P009', 'P017']
+Full DP table saved to outputs\large_dp_table.csv
+
+--- PHASE 3a: Shortest paths (Dijkstra) ---
+Stops to visit (node ids, 0 = warehouse): [0, 8, 9, 12, 13, 14, 18, 22, 24, 26, 32, 41, 56, 57]
+Shortest distance from the warehouse to each stop:
+  W -> 8      22.7 km   path: 0 -> 19 -> 38 -> 26 -> 6 -> 23 -> 8
+  W -> 9      27.6 km   path: 0 -> 19 -> 38 -> 34 -> 20 -> 2 -> 9
+  W -> 12      4.4 km   path: 0 -> 40 -> 12
+  W -> 13     15.9 km   path: 0 -> 19 -> 13
+  W -> 14     12.4 km   path: 0 -> 50 -> 14
+  W -> 18     30.2 km   path: 0 -> 19 -> 38 -> 34 -> 20 -> 2 -> 9 -> 18
+  W -> 22     12.1 km   path: 0 -> 19 -> 22
+  W -> 24     31.9 km   path: 0 -> 19 -> 38 -> 34 -> 20 -> 2 -> 15 -> 24
+  W -> 26     15.3 km   path: 0 -> 19 -> 38 -> 26
+  W -> 32     28.8 km   path: 0 -> 19 -> 38 -> 34 -> 20 -> 2 -> 32
+  W -> 41     17.7 km   path: 0 -> 50 -> 14 -> 41
+  W -> 56     15.5 km   path: 0 -> 19 -> 54 -> 56
+  W -> 57     32.7 km   path: 0 -> 19 -> 38 -> 34 -> 20 -> 52 -> 57
+
+--- PHASE 3b: Delivery route (Nearest-Neighbour TSP approximation) ---
+Stop order   : W -> 12 -> 14 -> 22 -> 26 -> 56 -> 13 -> 8 -> 9 -> 32 -> 18 -> 24 -> 57 -> 41 -> W
+Full road path: 0 -> 40 -> 12 -> 27 -> 14 -> 22 -> 19 -> 38 -> 26 -> 34 -> 56 -> 34 -> 26 -> 6 -> 13 -> 6 -> 23 -> 8 -> 45 -> 9 -> 32 -> 18 -> 15 -> 24 -> 15 -> 52 -> 57 -> 52 -> 20 -> 34 -> 38 -> 19 -> 22 -> 14 -> 41 -> 14 -> 50 -> 0
+Total route length: 127.4 km
+(Too many stops for brute force, optimum not computed.)
+
+--- Deadline check (speed 30 km/h, 5 min per stop) ---
+  P013 -> node 12  arrives  0.15 h, deadline  6.0 h  OK
+  P019 -> node 14  arrives  0.60 h, deadline  3.0 h  OK
+  P018 -> node 22  arrives  0.74 h, deadline  7.0 h  OK
+  P005 -> node 26  arrives  1.04 h, deadline  2.0 h  OK
+  P024 -> node 56  arrives  1.26 h, deadline  6.0 h  OK
+  P028 -> node 56  arrives  1.26 h, deadline 10.0 h  OK
+  P006 -> node 13  arrives  1.63 h, deadline 11.0 h  OK
+  P007 -> node 8   arrives  2.00 h, deadline  7.0 h  OK
+  P040 -> node 9   arrives  2.55 h, deadline  4.0 h  OK
+  P014 -> node 32  arrives  2.68 h, deadline  5.0 h  OK
+  P003 -> node 18  arrives  2.85 h, deadline  4.0 h  OK
+  P026 -> node 24  arrives  3.09 h, deadline  2.0 h  LATE
+  P011 -> node 57  arrives  3.55 h, deadline  2.0 h  LATE
+  P008 -> node 41  arrives  4.66 h, deadline  3.0 h  LATE
+Parcels late: 3 of 14   | trip finishes after 5.33 h
+
+Route picture saved to outputs\large_route.png

@@ -1,0 +1,53 @@
+=== Smart Courier Planner | dataset=small | parcels=12 | road nodes=10 | van capacity=40 kg ===
+
+--- PHASE 2a: Parcel prioritisation (Merge Sort) ---
+Sort key: (priority asc, deadline asc, value desc)
+Rank ID     Dest  Wt(kg)  Value  Prio  Deadline(h) 
+1    P01    9     5       60     1     2.0         
+2    P02    2     8       90     1     3.0         
+3    P09    1     11      80     1     3.0         
+4    P05    5     14      70     2     4.0         
+5    P03    3     12      50     2     5.0         
+6    P07    7     9       55     2     6.0         
+7    P10    4     6       35     2     7.0         
+8    P11    3     14      45     3     8.0         
+9    P04    4     7       40     3     8.0         
+10   P06    6     6       30     3     9.0         
+11   P08    8     4       25     3     10.0        
+12   P12    9     3       20     3     12.0        
+
+--- PHASE 2b: Optimal parcel selection (0/1 Knapsack DP) ---
+DP table size: 13 rows x 41 columns
+Selected parcels : ['P01', 'P02', 'P09', 'P07', 'P08', 'P12']
+Total weight     : 40 / 40 kg
+Total value (DP) : 330
+Greedy-in-sorted-order value for comparison: 300  (DP gain = 30)
+Left for the next trip: ['P05', 'P03', 'P10', 'P11', 'P04', 'P06']
+Full DP table saved to outputs\small_dp_table.csv
+
+--- PHASE 3a: Shortest paths (Dijkstra) ---
+Stops to visit (node ids, 0 = warehouse): [0, 1, 2, 7, 8, 9]
+Shortest distance from the warehouse to each stop:
+  W -> 1       6.8 km   path: 0 -> 9 -> 2 -> 1
+  W -> 2       4.4 km   path: 0 -> 9 -> 2
+  W -> 7       7.3 km   path: 0 -> 6 -> 7
+  W -> 8       4.2 km   path: 0 -> 8
+  W -> 9       2.1 km   path: 0 -> 9
+
+--- PHASE 3b: Delivery route (Nearest-Neighbour TSP approximation) ---
+Stop order   : W -> 9 -> 2 -> 1 -> 8 -> 7 -> W
+Full road path: 0 -> 9 -> 2 -> 1 -> 8 -> 7 -> 6 -> 0
+Total route length: 20.5 km
+Exact optimum (brute force over 5 stops): 20.5 km
+Approximation ratio = 1.000 (1.000 means optimal)
+
+--- Deadline check (speed 30 km/h, 5 min per stop) ---
+  P01 -> node 9   arrives  0.07 h, deadline  2.0 h  OK
+  P12 -> node 9   arrives  0.07 h, deadline 12.0 h  OK
+  P02 -> node 2   arrives  0.23 h, deadline  3.0 h  OK
+  P09 -> node 1   arrives  0.39 h, deadline  3.0 h  OK
+  P08 -> node 8   arrives  0.58 h, deadline 10.0 h  OK
+  P07 -> node 7   arrives  0.77 h, deadline  6.0 h  OK
+Parcels late: 0 of 6   | trip finishes after 1.10 h
+
+Route picture saved to outputs\small_route.png

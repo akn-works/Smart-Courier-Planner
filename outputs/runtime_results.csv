@@ -1,0 +1,43 @@
+step,algorithm,input_size,seconds
+sorting,merge_sort,100,0.000322
+sorting,quick_sort,100,0.000566
+sorting,insertion_sort,100,0.000620
+sorting,python_sorted,100,0.000025
+sorting,merge_sort,250,0.001052
+sorting,quick_sort,250,0.001312
+sorting,insertion_sort,250,0.004049
+sorting,python_sorted,250,0.000074
+sorting,merge_sort,500,0.002327
+sorting,quick_sort,500,0.002910
+sorting,insertion_sort,500,0.013812
+sorting,python_sorted,500,0.000125
+sorting,merge_sort,1000,0.003032
+sorting,quick_sort,1000,0.004027
+sorting,insertion_sort,1000,0.039608
+sorting,python_sorted,1000,0.000369
+sorting,merge_sort,2000,0.007164
+sorting,quick_sort,2000,0.010954
+sorting,insertion_sort,2000,0.154944
+sorting,python_sorted,2000,0.000526
+sorting,merge_sort,4000,0.015223
+sorting,quick_sort,4000,0.018634
+sorting,insertion_sort,4000,0.650395
+sorting,python_sorted,4000,0.001219
+knapsack_dp (C=500),knapsack_01,10,0.001606
+knapsack_dp (C=500),knapsack_01,25,0.003643
+knapsack_dp (C=500),knapsack_01,50,0.008401
+knapsack_dp (C=500),knapsack_01,100,0.014753
+knapsack_dp (C=500),knapsack_01,200,0.028841
+knapsack_dp (C=500),knapsack_01,400,0.052737
+dijkstra (one source),dijkstra,50,0.000064
+dijkstra (one source),dijkstra,100,0.000173
+dijkstra (one source),dijkstra,200,0.000302
+dijkstra (one source),dijkstra,500,0.000866
+dijkstra (one source),dijkstra,1000,0.001897
+dijkstra (one source),dijkstra,2000,0.004309
+nearest_neighbour_tsp,nn_tsp,10,0.000018
+nearest_neighbour_tsp,nn_tsp,25,0.000070
+nearest_neighbour_tsp,nn_tsp,50,0.000384
+nearest_neighbour_tsp,nn_tsp,100,0.001010
+nearest_neighbour_tsp,nn_tsp,200,0.005806
+nearest_neighbour_tsp,nn_tsp,400,0.017094
