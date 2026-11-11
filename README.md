@@ -7,9 +7,9 @@ every major step.
 
 | | |
 |---|---|
-| **Student** | Ayush |
+| **Student** | Ayush Kumar Nayak|
 | **Roll No.** | 2501730071 |
-| **Programme** | B.Tech CSE (AI & ML), 2nd Semester, Section C |
+| **Programme** | B.Tech CSE (AI & ML), 3rd Semester, Section C |
 | **Course** | Design and Analysis of Algorithms (DAA) - Capstone |
 
 ## Algorithms used
@@ -95,3 +95,15 @@ See `docs/REPORT.md` for the analysis.
 * Average speed 30 km/h and 5 minutes per stop (used only for the deadline check).
 * Knapsack maximises the parcels' `value` score (priority-weighted revenue) within the weight capacity.
 * Roads are two-way and lengths are non-negative.
+
+## Screenshots
+
+| Evidence | File |
+|---|---|
+| Small dataset run | `screenshots/01_run_small.png` |
+| Large dataset run | `screenshots/02a_run_large.png`, `screenshots/02b_run_large.png` |
+| Unit tests (all pass) | `screenshots/03_unit_tests.png` |
+| Runtime benchmark | `screenshots/04a_benchmark_run.png`, `screenshots/04b_benchmark_run.png` |
+
+![Small dataset run](screenshots/01_run_small.png)
+![Unit tests](screenshots/03_unit_tests.png)

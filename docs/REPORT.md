@@ -1,6 +1,6 @@
 # Smart Courier Planner - Final Report
 
-**Student:** Ayush | **Roll No.:** 2501730071 | B.Tech CSE (AI & ML), Sem 2, Section C
+**Student:** Ayush Kumar Nayak | **Roll No.:** 2501730071 | B.Tech CSE (AI & ML), Sem 3, Section C
 
 ## 1. Objective
 Build a prototype that, given parcels and delivery points, produces an ordered delivery route and
